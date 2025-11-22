@@ -6,27 +6,31 @@ from functools import wraps
 import groq
 from flask import Flask, render_template, request, jsonify, g
 from dotenv import load_dotenv
+import firebase_admin
 from firebase_admin import credentials, auth, firestore, initialize_app
 
 load_dotenv()
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
+# Konfiguracja z Twoim ID projektu
+firebase_config = {'projectId': 'ai-mind-mapper'}
+
 db = None
 try:
-    if os.path.exists("serviceAccountKey.json"):
-        cred = credentials.Certificate("serviceAccountKey.json")
-        initialize_app(cred)
-        db = firestore.client()
-        print("✅ Firebase Admin initialized with serviceAccountKey.json. Security ENABLED.")
-    elif os.path.exists("firebase-admin-key.json"):
-        cred = credentials.Certificate("firebase-admin-key.json")
-        initialize_app(cred)
-        db = firestore.client()
-        print("✅ Firebase Admin initialized with firebase-admin-key.json. Security ENABLED.")
-    else:
-        initialize_app()
-        db = firestore.client()
-        print("✅ Firebase Admin initialized with default credentials (cloud environment).")
+    if not firebase_admin._apps:
+        if os.path.exists("serviceAccountKey.json"):
+            cred = credentials.Certificate("serviceAccountKey.json")
+            initialize_app(cred, firebase_config)
+            print("✅ Init z serviceAccountKey.json")
+        elif os.path.exists("firebase-admin-key.json"):
+            cred = credentials.Certificate("firebase-admin-key.json")
+            initialize_app(cred, firebase_config)
+            print("✅ Init z firebase-admin-key.json")
+        else:
+            # Fallback dla środowiska chmurowego (Render)
+            initialize_app(options=firebase_config)
+            print("✅ Init default (cloud)")
+    db = firestore.client()
 except ValueError as e:
     db = firestore.client()
     print(f"ℹ️ Firebase Admin already initialized: {e}")

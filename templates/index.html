@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Mind</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <div id="top-toggles">
+        <div class="switch-row" data-tooltip="Tryb Skupienia (przyciemnij resztę)">
+            <label class="custom-toggle">
+                <input type="checkbox" id="focus-switch" />
+                <span class="toggle-track">
+                    <span class="icon-on">🎯</span>
+                    <span class="icon-off">👁️</span>
+                    <span class="toggle-knob"></span>
+                </span>
+            </label>
+        </div>
+        <div class="switch-row" data-tooltip="Włącz/Wyłącz generowanie Emoji w mapie">
+            <label class="custom-toggle">
+                <input type="checkbox" id="emoji-switch" />
+                <span class="toggle-track">
+                    <span class="icon-on">😊</span>
+                    <span class="icon-off">📝</span>
+                    <span class="toggle-knob"></span>
+                </span>
+            </label>
+        </div>
+    </div>
+    
+    <div id="bottom-toggles">
+        <div class="switch-row" data-tooltip="Przełącz tryb ciemny/jasny">
+            <label class="custom-toggle">
+                <input type="checkbox" id="theme-switch" />
+                <span class="toggle-track">
+                    <span class="icon-on">🌙</span>
+                    <span class="icon-off">☀️</span>
+                    <span class="toggle-knob"></span>
+                </span>
+            </label>
+        </div>
+        <div class="switch-row" data-tooltip="Włącz/Wyłącz dźwięki interfejsu">
+            <label class="custom-toggle">
+                <input type="checkbox" id="sound-switch" checked />
+                <span class="toggle-track">
+                    <span class="icon-on">🔊</span>
+                    <span class="icon-off">🔇</span>
+                    <span class="toggle-knob"></span>
+                </span>
+            </label>
+        </div>
+    </div>
+    
+    <div id="auth-container">
+        <button id="google-login-button">
+            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Zaloguj przez Google
+        </button>
+        <div id="user-info" style="display: none;">
+            <div class="user-details">
+                <img id="user-photo" src="" alt="Avatar">
+                <div class="user-text">
+                    <span id="user-name"></span>
+                    <button id="logout-button">Wyloguj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="dropdown-menu-container" style="display: none;">
+        <button id="toggle-map-list">Moje Mapy 🗺️</button>
+        <div id="map-management-panel">
+            <ul id="map-list">
+                
+            </ul>
+        </div>
+    </div>
+    
+    <main>
+        <header>
+            <h1>Flow Mind ✨</h1>
+        </header>
+        <p>Wpisz dowolny temat, a ja stworzę dla Ciebie mapę myśli.</p>
+        <input type="text" id="topic-input" placeholder="Np. Jak działają silniki odrzutowe?">
+        <button id="generate-btn">Generuj Mapę</button>
+    </main>
+    
+    <div id="mindmap-container">
+        <svg id="mindmap-svg"></svg>
+    </div>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="🔍 Szukaj w mapie...">
+    </div>
+    <div class="button-container">
+        <button id="reset-btn">Stwórz nową mapę</button>
+        <button id="export-btn">Eksportuj do notatek</button>
+        <button id="export-png-btn">📥 Pobierz jako PNG</button>
+    </div>
+    
+    <div id="feedback-message" style="display: none;"></div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

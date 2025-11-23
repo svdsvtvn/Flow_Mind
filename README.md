@@ -2,7 +2,9 @@
 
 Aplikacja webowa to "centrum dowodzenia" ekosystemu Flow Mind. Zaprojektowana z myślą o pracy głębokiej (**Deep Work**) na dużym ekranie, służy do analizy, strukturyzowania i zarządzania wiedzą zebraną "w biegu".
 
-![Flow Mind Web Interface](image.p)
+[Flow Mind Web Interface]
+<img width="1898" height="907" alt="Zrzut ekranu 2025-11-23 113207" src="https://github.com/user-attachments/assets/f352ed45-2119-4e0e-80b1-8a7efe537be7" />
+
 
 ### 🛠️ Stack Technologiczny
 
@@ -44,7 +46,9 @@ Zaimplementowano funkcje umożliwiające wyciągnięcie wiedzy z ekosystemu:
 
 The web application serves as the "command center" of the Flow Mind ecosystem. Designed for **Deep Work** on large screens, it facilitates the analysis, structuring, and management of knowledge gathered "on the go".
 
-![Flow Mind Web Interface](Zrzut%20ekranu%202025-10-31%20231621.png)
+[Flow Mind Web Interface]
+
+<img width="1898" height="907" alt="Zrzut ekranu 2025-11-23 113207" src="https://github.com/user-attachments/assets/d6a92b6e-ff7a-4df6-b882-089dd9624068" />
 
 ### 🛠️ Tech Stack
 

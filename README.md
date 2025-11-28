@@ -1,5 +1,7 @@
 ## 🖥️ Flow Mind Web: Centrum Analityczne
 
+Live Demo: https://ai-mind-mapper.onrender.com/ (Note: Hosted on Render Free Tier. Initial loading may take up to 60 seconds due to cold start.)
+
 Aplikacja webowa to "centrum dowodzenia" ekosystemu Flow Mind. Zaprojektowana z myślą o pracy głębokiej (**Deep Work**) na dużym ekranie, służy do analizy, strukturyzowania i zarządzania wiedzą zebraną "w biegu".
 
 [Flow Mind Web Interface]
@@ -39,10 +41,12 @@ Zaimplementowano funkcje umożliwiające wyciągnięcie wiedzy z ekosystemu:
 * **Eksport do PNG:** Renderowanie widoku DOM do pliku graficznego (z użyciem `html-to-image`).
 * **Eksport do TXT:** Algorytm parsujący strukturę drzewa do formatu tekstowego z wcięciami (hierarchia).
 
--
--
--
+
+
+  
 ## 🖥️ Flow Mind Web: The Analytical Hub
+
+Live Demo: https://ai-mind-mapper.onrender.com/ (Note: Hosted on Render Free Tier. Initial loading may take up to 60 seconds due to cold start.)
 
 The web application serves as the "command center" of the Flow Mind ecosystem. Designed for **Deep Work** on large screens, it facilitates the analysis, structuring, and management of knowledge gathered "on the go".
 
